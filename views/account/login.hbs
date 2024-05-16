@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>www.depot.com/log-in</title>
+</head>
+
+<body>
+    {{#if admin}}
+    <div class="login-wrapper radius flex flex-column a-center j-center gap pad shadow black-clr white-bg">
+        <img src="/images/depot-logo.png" alt="">
+        <p class="font-md bold">Administrator login</p>
+        <form action="/admin/login-to-home-page" method="post" class="flex w-full flex-column relative">
+            <label>Enter the depot's email address</label>
+            <input type="email" placeholder="Enter email address" class="radius" name="email">
+            <label>Enter the login key</label>
+            <input type="email" placeholder="Enter password" class="radius" name="password">
+            <input type="submit" class="radius submit font-sm bold white-clr pointer mt-7" value="Get otp">
+        </form>
+    </div>
+    {{else}}
+    <div class="login-wrapper radius flex flex-column a-center j-center gap pad shadow black-clr white-bg">
+        <img src="images/depot-logo.png" alt="">
+        <p class="font-md bold">Login to depot</p>
+        <form action="/login-to-depot" method="post" class="flex w-full flex-column relative">
+        
+            {{!-- email or phone input  --}}
+            <label>Enter your email or phone</label>
+            <input type="text" placeholder="Enter email address or phone number" class="radius" id="emailOrPhone">
+            {{!-- email validation  --}}
+            <div class="email-error absolute right flex gap-1 a-center">
+                <h5 class="email-required light red-clr" style="display: none;">This field is required
+                </h5>
+                <h5 class="email-format light red-clr" style="display: none;">Ensure your email ends with
+                    @gmail.com</h5>
+            </div>
+
+            {{!-- password input  --}}
+            <label>Enter your password</label>
+            <input type="password" placeholder="Enter password" class="radius" name="password" id="password">
+            {{!-- password validation  --}}
+            <div class="password-error absolute right flex gap-1 a-center">
+                {{#if logginErr}}
+                <h5 class="light red-clr" id="server-error-message">{{logginErr}}</h5>
+                {{else}}
+                <h5 class="light red-clr" style="display: none;" id="server-error-message">{{logginErr}}</h5>
+                {{/if}}
+                <h5 class="password-required light red-clr" style="display: none;">This field is required
+                </h5>
+                <h5 class="password-min-length light red-clr" style="display: none;">Minimum 8 characters
+                    required</h5>
+            </div>
+
+            {{!-- or login with authenticated account  --}}
+            <p class="fonts-sm text-center">
+                OR
+            </p>
+            <div class="google w-full radius border-green height flex a-center gap pad-inline pointer">
+                <img width="48" height="48" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo" />
+                Continue with Google
+            </div>
+            <div class="google w-full radius border-green height flex a-center gap pad-inline pointer">
+                <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft.png" alt="microsoft" />
+                Continue with Microsoft account
+            </div>
+            <div class="google w-full radius border-green height flex a-center gap pad-inline pointer">
+                <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/mac-os.png" alt="mac-os" />
+                Continue with Apple ID
+            </div>
+            <p>
+                By continueing you agree depot's <span class="terms pointer">Term of use</span> and <span
+                    class="terms pointer">Privacy policy</span>
+            </p>
+            <input type="submit" class="radius submit font-sm bold white-clr pointer" value="Get otp">
+        </form>
+        <p class="text-center">
+            Dont't have an account? <span><a href="/depot-account-sign-in">Singup</a></span>
+
+        </p>
+    </div>
+    {{/if}}
+</body>
+
+</html>

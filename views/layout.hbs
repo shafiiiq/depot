@@ -2,9 +2,20 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/cssHelper/helper.css">
+    {{#if index}}
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+    {{else if account}}
+    <link rel='stylesheet' href='/stylesheets/account.css' />
+    {{else if admin}}
+    <link rel='stylesheet' href='/stylesheets/admin.css' />
+    {{/if}}
   </head>
   <body>
     {{{body}}}
+
+    {{#if userAccount}}
+    <script src="/javascripts/account.js"></script>
+    {{/if}}
   </body>
 </html>

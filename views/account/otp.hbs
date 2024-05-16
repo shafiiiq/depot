@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="depot-account.css">
+    <title>www.depot.com/otp</title>
+</head>
+
+<body>
+    <div class="login-wrapper radius flex flex-column a-center j-center gap pad shadow black-clr white-bg">
+        <img src="images/depot-logo.png" alt="">
+        <form action="" class="flex w-full flex-column relative">
+            <div class="otp flex gap">
+                <input type="text" maxlength="1" class="radius border-green font-sm otp-input" style="padding-left: 1.8rem;">
+                <input type="text" maxlength="1" class="radius border-green font-sm otp-input" style="padding-left: 1.8rem;">
+                <input type="text" maxlength="1" class="radius border-green font-sm otp-input" style="padding-left: 1.8rem;">
+                <input type="text" maxlength="1" class="radius border-green font-sm otp-input" style="padding-left: 1.8rem;">
+                <input type="text" maxlength="1" class="radius border-green font-sm otp-input" style="padding-left: 1.8rem;">
+            </div>
+            <p class="text-center pointer terms" style="margin-top: 3rem;">
+                Didn't get a code?
+            </p>
+            <input type="submit" class="radius submit font-sm bold white-clr pointer" value="Verify otp" style="margin-top: 15rem;">
+        </form>
+    </div>
+
+    <script>
+        const otpInputs = document.querySelectorAll('.otp-input');
+
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.inputType === 'deleteContentBackward' && index > 0) {
+                    otpInputs[index - 1].focus();
+                } else if (index < otpInputs.length - 1 && e.target.value.length === 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && index > 0 && e.target.value === '') {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

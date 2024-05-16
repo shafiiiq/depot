@@ -4,9 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./db/db')
+var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -20,6 +21,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// session creation
+console.log('Before session middleware');
+app.use(session({ secret: "key", cookie: { maxAge: 60000000000 }, resave: true, saveUninitialized: true }));
+console.log('After session middleware');
+
 //database connection setup
 db.connect((err) => {
   if(err) {
@@ -29,8 +35,9 @@ db.connect((err) => {
   }
 })
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// router configuration 
+app.use('/', userRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
