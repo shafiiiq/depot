@@ -335,3 +335,8 @@ form img {
 .password-error {
     top: 8.3rem;
 }
+
+/* back button to home  */
+.back-to-home span {
+    font-size: 50px;
+}
