@@ -13,13 +13,13 @@
 
 <body>
     <div class="search-overlay absolute right bottom left" style="display: none;"></div>
-    <!-- <div class="intro absolute w-full h-full z-high black-bg flex j-center a-center flex-column">
+    <div class="intro absolute w-full h-full z-high black-bg flex j-center a-center flex-column">
         <video autoplay src="images/depot-intro.mp4" type="video/mp4"></video>
         <img src="images/depot-logo.png" alt="" class="absolute intro-logo">
         <p class="t-center font-sm absolute light">
             Beware of your style
         </p>
-    </div> -->
+    </div>
 
     <!-- header section starts  -->
     <header class="flex flex-column">
@@ -29,7 +29,7 @@
             <div class="search relative pointer">
                 <input type="search" id="search-input" class="w-full pl-1 radius-vh h-full radius glass"
                     placeholder="Beware of your styles">
-                <div class="search-icon absolute flex a-center j-center right">
+                <div class="search-icon absolute flex a-center j-center right" onclick="searchProduct()">
                     <span class="material-symbols-rounded">
                         search
                     </span>
@@ -56,10 +56,17 @@
             </div>
             <div class="navigations flex j-center a-center gap">
                 <ul class="flex j-center a-center gap">
+                    {{#if user}}
+                    <li class="pointer mr-4">
+                        <span class="bold">Deliver to</span> <br>
+                        <span>Add your address</span>
+                    </li>
+                    {{else}}
                     <li class="pointer">
                         <span class="bold">Deliver to</span> <br>
                         <span>login to view the address</span>
                     </li>
+                    {{/if}}
                     <li class="pointer flex a-center pointer">
                         Oders
                         <span class="material-symbols-rounded">
@@ -83,13 +90,20 @@
                     </li>
                 </ul>
                 {{#if user}}
-                <a href="/depot-account-user-logout" class="radius-vh sign-in pointer">
-                    <button class="radius-vh full white-clr glass pointer">
+                <div class="radius-vh sign-in pointer flex j-between a-center"
+                    style="padding: 0.2rem 0.2rem 0.2rem 1rem;">
+                    <a href="/depot-account-user-logout" class="white-clr">
                         Logout
-                    </button>
-                </a>
+                    </a>
+                    <div class="profile pointer h-full flex j-center a-center red-clr white-bg r-p-half font-xs"
+                        style="border-radius: 50%;">
+                        <h1 class="light">
+                            MS
+                        </h1>
+                    </div>
+                </div>
                 {{else}}
-                <a href="/depot-account-login" class="radius-vh sign-in pointer">
+                <a href="/depot-account-login" class="radius-vh white-clr sign-in pointer">
                     <button class="radius-vh full white-clr glass pointer">
                         Sign in
                     </button>
@@ -1250,6 +1264,60 @@
             document.querySelector('.search-history').style.display = 'none';
             document.getElementById('search-input').style.border = '2px solid #272a34'
         });
+
+        function searchProduct() {
+            let keyValue = document.getElementById('search-input').value;
+
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/search-products';
+
+            var searchKey = document.createElement('input');
+            searchKey.type = 'hidden';
+            searchKey.name = 'searchKey';
+            searchKey.value = keyValue;
+            form.appendChild(searchKey);
+
+            // Append the form to the document body
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        }
+
+        document.getElementById('search-input').addEventListener('click', function () {
+            console.log("button clicked");
+            document.getElementById('search-input').addEventListener('input', function () {
+                let ifKey = document.getElementById('search-input').value;
+                console.log(ifKey);
+
+                if (ifKey != '') {
+                    document.addEventListener('keydown', function (event) {
+                        console.log("searched");
+                        if (event.key === 'Enter' || event.keyCode === 13) {
+                            let keyValue = document.getElementById('search-input').value;
+
+                            var form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = '/search-products';
+
+                            var searchKey = document.createElement('input');
+                            searchKey.type = 'hidden';
+                            searchKey.name = 'searchKey';
+                            searchKey.value = keyValue;
+                            form.appendChild(searchKey);
+
+                            // Append the form to the document body
+                            document.body.appendChild(form);
+
+                            // Submit the form
+                            form.submit();
+                        }
+                    });
+
+                }
+            })
+        })
 
     </script>
 </body>

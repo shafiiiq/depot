@@ -10,11 +10,13 @@
 </head>
 
 <body>
+    {{#if user}}
     <a href="/" class="back-to-home black-clr absolute left-2 top-2">
         <span class="material-symbols-rounded">
             arrow_back
         </span>
     </a>
+    {{/if}}
     {{#if admin}}
     <div class="login-wrapper radius flex flex-column a-center j-center gap pad shadow black-clr white-bg">
         <img src="/images/depot-logo.png" alt="">
@@ -24,7 +26,7 @@
             <input type="email" placeholder="Enter email address" class="radius" name="email">
             <label>Enter the login key</label>
             <input type="email" placeholder="Enter password" class="radius" name="password">
-            <input type="submit" class="radius submit font-sm bold white-clr pointer mt-7" value="Get otp">
+            <input type="submit" class="radius submit font-sm bold white-clr pointer mt-7" value="Login">
         </form>
     </div>
     {{else}}

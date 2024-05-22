@@ -33,5 +33,12 @@ module.exports = {
                 resolve({ status: false })
             }
         })
+    },
+
+    addProducts: (productData, callback) => {
+        db.get().collection('warehouse').insertOne(productData).then(data => {
+            const insertedId = data?.insertedId?.toString();
+            callback(insertedId);
+        });
     }
 }

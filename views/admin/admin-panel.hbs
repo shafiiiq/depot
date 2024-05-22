@@ -85,13 +85,13 @@
                 </p>
             </div>
             <div id="add-products" class="w-dull" style="display: none;">
-                <form action="" class="w-full flex flex-column gap-4">
+                <form action="/admin/add-products" method="post" enctype="multipart/form-data" class="w-full flex flex-column gap-4">
                     <div class="attachements grid gap">
                         <div class="items radius relative">
                             <span class="material-symbols-rounded absolute abs-mid">
                                 image
                             </span>
-                            <input type="file" class="full hidden">
+                            <input type="file" class="full invisible" name="productImage">
                         </div>
                         <div class="items radius add-image flex a-center pointer j-center relative">
                             <span class="material-symbols-rounded">
@@ -103,7 +103,7 @@
                             <span class="material-symbols-rounded absolute abs-mid">
                                 smart_display
                             </span>
-                            <input type="file" class="full hidden">
+                            <input type="file" class="full invisible" name="productVideo">
                         </div>
                         <div class="items radius add-video flex a-center pointer j-center relative">
                             <span class="material-symbols-rounded">
@@ -115,17 +115,17 @@
                     <div class="details grid gap">
                         <div class="items flex flex-column gap">
                             Product name
-                            <input type="text" placeholder="Product name" class="full radius pad-inline glass height">
+                            <input type="text" placeholder="Product name" class="full radius pad-inline glass height" name="productName">
                         </div>
                         <div class="items flex flex-column gap">
                             Price
-                            <input type="text" placeholder="Price" class="full radius pad-inline glass height">
+                            <input type="text" placeholder="Price" class="full radius pad-inline glass height" name="productPrice">
                         </div>
                         <div class="items flex flex-column gap">
                             Quality
                             <div class="custom-datalist radius height">
                                 <input type="text" id="searchInput" class="full radius pad-inline glass"
-                                    placeholder="Search quality">
+                                    placeholder="Search quality" name="productQuality">
                                 <div class="datalist-items radius scroll w-full" id="datalistItems"></div>
                             </div>
                         </div>
@@ -133,43 +133,42 @@
                             Brand
                             <div class="custom-datalist radius height">
                                 <input type="text" id="searchInput" class="full radius pad-inline glass"
-                                    placeholder="Search brand">
+                                    placeholder="Search brand" name="productBrand">
                                 <div class="datalist-items radius scroll w-full" id="datalistItems"></div>
                             </div>
                         </div>
                         <div class="items flex flex-column gap">
                             Color
-                            <input type="text" placeholder="Color" class="full radius pad-inline glass height">
+                            <input type="text" placeholder="Color" class="full radius pad-inline glass height" name="productColor">
                         </div>
                         <div class="items flex flex-column gap">
                             Size
-                            <input type="text" placeholder="Size" class="full radius pad-inline glass height">
+                            <input type="text" placeholder="Size" class="full radius pad-inline glass height" name="productSize">
                         </div>
                         <div class="items flex flex-column gap">
                             Decription
-                            <textarea name="" id="" cols="30" rows="10"
+                            <textarea name="productDescription" id="" cols="30" rows="10"
                                 class="full radius pad-inline glass height white-clr"
                                 placeholder="Decription"></textarea>
                         </div>
                         <div class="items flex flex-column gap">
                             Quantity
-                            <input type="text" placeholder="Quantity" class="full radius pad-inline glass height">
+                            <input type="text" placeholder="Quantity" class="full radius pad-inline glass height" name="productQuantity">
                         </div>
                         <div class="items flex flex-column gap">
                             Weight
-                            <input type="text" placeholder="Weight" class="full radius pad-inline glass">
+                            <input type="text" placeholder="Weight" class="full radius pad-inline glass" name="productWeight">
                         </div>
                         <div class="items flex flex-column gap">
                             Category
                             <div class="custom-datalist radius height">
                                 <input type="text" id="searchInput" class="full radius pad-inline glass"
-                                    placeholder="Search category">
+                                    placeholder="Search category" name="productCategory">
                                 <div class="datalist-items radius scroll w-full" id="datalistItems"></div>
                             </div>
                         </div>
                     </div>
-                    <input type="submit"
-                        class="radius red-bg white-clr flex a-center j-center height font-sm pointer ease hover-green">
+                    <input type="submit" class="radius red-bg white-clr flex a-center j-center height font-sm pointer ease hover-green">
                 </form>
             </div>
         </div>

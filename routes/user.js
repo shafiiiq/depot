@@ -25,27 +25,29 @@ const isLoggedIn = (req, res, next) => {
 };
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', {index: true});
+router.get('/', function (req, res, next) {
+  userHelper.getCountedItems(20).then((productsCounted) => {
+    res.render('index', { index: true, productsCounted});
+  })
 });
 
 // user login page render 
 router.get('/depot-account-login', isLoggedIn, (req, res) => {
-  res.render('account/login', {account: true, userAccount: true})
+  res.render('account/login', { account: true, userAccount: true, user: true })
 })
 
 // user sign up page render 
 router.get('/depot-account-sign-in', (req, res) => {
-  res.render('account/sign', {account: true, userAccount: true})
+  res.render('account/sign', { account: true, userAccount: true })
 })
 
 // user account creation signup
 router.post('/depot-account-sign-in', (req, res) => {
   userHelper.signUp(req.body).then((response) => {
     if (response) {
-      res.render('account/login', {account: true, userAccount: true})
+      res.render('account/login', { account: true, userAccount: true })
     } else {
-      res.render('account/sign', {account: true, userAccount: true, signErr: "Account is already exist"})
+      res.render('account/sign', { account: true, userAccount: true, signErr: "Account is already exist" })
     }
   })
 })
@@ -56,14 +58,23 @@ router.post('/login-to-depot', (req, res) => {
     if (response.status) {
       req.session.user = response.user;
       req.session.user.loggedIn = true;
-      
+
       // user session data 
       let user = req.session.user
-      res.render('index', {index: true, user})
+      res.render('index', { index: true, user })
     } else {
       res.render('account/login', { account: true, user: true, logginErr: "Invalid email or password" });
       loggedIn = false
     }
+  })
+});
+
+router.post('/search-products', (req, res) => {
+  let searchKey = req.body.searchKey;
+  console.log(searchKey);
+  userHelper.searchResult(searchKey).then((products) => {
+    let itemCount = products.length
+    res.render('user/search-result', {searchKey, searchResult:true, userAction: true, products, itemCount})
   })
 });
 

@@ -36,7 +36,6 @@ router.get('/account-login', isLoggedIn, (req, res) =>{
 router.post('/login-to-home-page', (req, res) => {
   adminHelper.login(req.body).then((response) => {
     if (response.status) {
-      console.log(req.session);
       req.session.admin = response.admin;
       req.session.admin.loggedIn = true;
       res.redirect('/admin/admin-panel')
@@ -47,8 +46,24 @@ router.post('/login-to-home-page', (req, res) => {
   })
 });
 
+// admin panel render 
 router.get('/admin-panel', verifyLogin, (req, res) => {
   res.render('admin/admin-panel', {admin: true})
+})
+
+router.post('/add-products', verifyLogin, (req, res) => {
+  adminHelper.addProducts(req.body, (ProductId) => {
+    let productImage = req.files.productImage;
+    productImage.mv('./public/productsData/' + ProductId + 'Image.jpg', (err, done) => {});
+    if (req.files && req.files.productImage) {
+      console.log("have image");
+    }
+    if (req.files && req.files.productVideo) {
+      let productVideo = req.files.productVideo;
+      productVideo.mv('./public/productsData/' + ProductId + '.Video.mp4', (err, done) => {});
+    }
+  }) 
+  res.render('admin/admin-panel', {admin: true, addedProduct: true})
 })
 
 router.get('/logout-adiministrator', (req, res) => {

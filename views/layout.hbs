@@ -9,6 +9,8 @@
     <link rel='stylesheet' href='/stylesheets/account.css' />
     {{else if admin}}
     <link rel='stylesheet' href='/stylesheets/admin.css' />
+    {{else if searchResult}}
+    <link rel='stylesheet' href='/stylesheets/search-result.css' />
     {{/if}}
   </head>
   <body>
@@ -16,6 +18,8 @@
 
     {{#if userAccount}}
     <script src="/javascripts/account.js"></script>
+    {{else if userAction}}
+    <script src="/javascripts/user-action.js"></script>
     {{/if}}
   </body>
 </html>

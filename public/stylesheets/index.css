@@ -11,6 +11,11 @@
   text-decoration: none;
 }
 
+body {
+  background-color: var(--white-color);
+  overflow-x: hidden;
+}
+
 body::-webkit-scrollbar {
   width: 6px;
 }
@@ -283,7 +288,7 @@ section {
 
 /* depot the warehouse intro starts */
 .intro {
-  animation: intro 4s cubic-bezier(0.88, -0.33, 0.01, 1.26) forwards;
+  animation: intro 3.7s cubic-bezier(0.88, -0.33, 0.01, 1.26) forwards;
   opacity: 0;
 }
 
@@ -350,9 +355,15 @@ section {
 header {
   height: 10rem;
   width: 100%;
-  position: fixed;
-  z-index: 2;
   top: 0;
+  animation: headerFixed 5.1s forwards;
+}
+
+@keyframes headerFixed {
+  100% {
+    z-index: 200000000000000000;
+    position: fixed;
+  }
 }
 
 header .top {
@@ -370,7 +381,13 @@ header .top img {
   width: 35%;
   height: 3rem;
   border-radius: 100vh;
-  z-index: 2000000000000000000000000;
+  animation: searchIndex 5.1s forwards;
+}
+
+@keyframes searchIndex {
+  100% {
+    z-index: 2000000000000000000000000;
+  }
 }
 
 .search input {
@@ -395,15 +412,19 @@ header .top img {
 .sign-in {
   width: 10rem;
   height: 3.3rem;
+  border: 1px solid #424265;
+  transition: all 0.3s cubic-bezier(0, 1.63, 1, 1);
 }
 
 .sign-in button {
   font-size: 18px;
-  transition: all 0.3s cubic-bezier(0, 1.63, 1, 1);
-  border: 1px solid #424265;
 }
 
-.sign-in button:hover {
+.sign-in .profile {
+  width: 2.9rem;
+}
+
+.sign-in:hover {
   background-color: var(--secondary-color);
   border: none;
 }
@@ -453,8 +474,13 @@ header .bottom-header ul>li {
 
 /* home sections starts */
 section#home {
+  animation: homeMargin 3.7s cubic-bezier(0.88, -0.33, 0, 1.03) forwards;
+}
 
-  margin-top: 10rem;
+@keyframes homeMargin {
+  100% {
+    margin-top: 10rem;
+  }
 }
 
 .categories .items {
@@ -526,7 +552,8 @@ section#sales .container .items img {
 }
 
 section#sales .container .items:hover {
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  ;
 }
 
 section#sales .container .items>span {
@@ -582,7 +609,7 @@ section#sponsored .video {
   box-shadow: none;
 }
 
-.deals .showcase  .items{
+.deals .showcase .items {
   height: 15rem;
 }
 
